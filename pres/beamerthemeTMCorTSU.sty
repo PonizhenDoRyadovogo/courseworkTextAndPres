@@ -1,0 +1,64 @@
+\ProvidesPackage{beamerthemeTMCorTSU}
+
+\mode<presentation>
+
+\newif\ifbeamer@secheader
+\beamer@secheaderfalse
+
+\DeclareOptionBeamer{secheader}{\beamer@secheadertrue}
+\ProcessOptionsBeamer
+
+\usecolortheme{TMCorTSU}
+\useinnertheme[shadow]{rounded}
+\useoutertheme{TMCorTSU}
+
+
+% Tills' opinion: should be done in an inner theme, not here.
+
+\newcommand{\subauthor}[1]{\def\insertsubauthor{#1}}
+\newcommand{\insertsubauthor}{} % empty default
+
+% default institute (can be redefined in document)
+\providecommand{\institute}[1]{\def\insertinstitute{#1}}
+\providecommand{\insertinstitute}{Институт}
+
+\AtBeginDocument{%
+  \ifx\insertinstitute\@empty
+    \institute{Институт прикладной математики и компьютерных наук\\Томский государственный университет}
+  \fi
+}
+% ------------------------------------------
+% Custom title page frame
+% ------------------------------------------
+\defbeamertemplate*{title page}{TMCorTSU}{
+    \begin{frame}
+        \centering
+
+        \vspace*{0.12\textheight}
+
+        {\LARGE \textbf{\textcolor{structure}{\inserttitle}} \par}
+
+        \vspace{0.06\textheight}
+        {\large \insertauthor \par}
+
+        % --- Conditional subauthor ---
+        \begingroup
+        \ifx\insertsubauthor\@empty
+        \else
+            \vspace{0.03\textheight}
+            {\normalsize \insertsubauthor \par}
+        \fi
+        \endgroup
+        % -----------------------------
+
+        \vspace{0.06\textheight}
+        {\normalsize \insertinstitute \par}
+
+        \vfill
+        {\insertdate}
+    \end{frame}
+}
+% Use our title page by default
+\setbeamertemplate{title page}[TMCorTSU]
+\mode
+<all>

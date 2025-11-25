@@ -1,0 +1,31 @@
+\ProvidesPackage{beamerthemeTMCorTSU}
+
+\mode<presentation>
+
+\setbeamercolor*{under line}{parent=palette primary}
+\setbeamertemplate{page number in head/foot}[totalframenumber]%
+\setbeamertemplate{navigation symbols}{}
+\defbeamertemplate*{footline}{tmcor tsu theme}
+{%
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=\paperwidth,ht=2.25ex,dp=1ex]{under line}%
+    \hspace*{1em}
+    \raisebox{-0.12em}{\includegraphics[height=2.25ex]{tsu_logo.png}}%
+    \hspace*{1em}
+    \usebeamerfont{under line}\insertshortauthor
+    \hfill
+    \usebeamerfont{under line}%
+    \insertshortdate{}%
+    \hspace*{1em}
+    \usebeamercolor[fg]{page number in head/foot}%
+    \usebeamerfont{page number in head/foot}%
+    \usebeamertemplate{page number in head/foot}%
+    \hspace*{1em}
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\setbeamersize{text margin left=1em,text margin right=1em}
+
+\mode
+<all>
