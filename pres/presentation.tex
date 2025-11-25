@@ -1,5 +1,5 @@
 \documentclass{beamer}
-
+\usefonttheme[onlymath]{serif}
 % Кодировка и шрифты
 \usepackage[utf8]{inputenc}
 \usepackage[T2A]{fontenc}
@@ -23,8 +23,47 @@
 
 \titlepage
 
-\begin{frame}{Название слайда}
-    Содержание слайда
+\begin{frame}{В предыдущих сериях}
+    \begin{itemize}
+        \item<1-> \(\lambda(t)\) -- кусочно-постоянный процесс с \(n\) состояниями: \(S_1,S_2,\dots,S_n\);
+        \item<2-> \(\lambda(t)\) -- принципиально ненаблюдаемый случайный марковский процесс;
+        \item<3-> Если \(\lambda(t)=\lambda_i\), то имеет место \(S_i\)-е состояние процесса;
+        \item<4-> \(\lambda(t),i=\overline{1,n}\);
+        \item<5-> \(\lambda_1>\lambda_2>\dots>\lambda_n\);
+        \item<6-> \(\eta=\min(\eta^{(1)},\eta^{(2)})\);
+        \item<7-> \(\eta^{(1)}:F_i^{(1)}(t)=1-e^{-\lambda_it}, \quad \eta^{(2)}:F_i^{(2)}(t)=1-e^{-\alpha_it}\);
+        \item<8-> По методу обратных функций: \(\eta^{(1)}=-\frac{1}{\lambda_i}ln(1-x_1), \quad \eta^{(2)}=-\frac{1}{\alpha_i}ln(1-x_2)\), где \(x_1,x_2\in[0;1)\);
+        \item<9-> \(P_1^{(1)}(\lambda_j|\lambda_i), \quad P_1^{(2)}(\lambda_j|\lambda_i), \quad i,j=\overline{1,n}\);
+        \item<10-> \(\sum_{i=1}^n P_1^{(1)}(\lambda_j|\lambda_i)=1,j=\overline{1,n}; \quad \sum_{i=1}^n P_1^{(2)}(\lambda_j|\lambda_i)=1, j=\overline{1,n}\)
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Формирование наблюдаемого потока событий}
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.8\linewidth]{img/streamExample.jpg}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Введение}
+    \textbf{Цель} -- уметь по наблюдениям за моментами времени \(t_1,t_2,\dots,\) наступления событий обобщенного синхронного потока второго порядка с произвольным числом состояний на интервале \((t_0,t)\) оценить состояние процесса \(\lambda(t)\) в момент времени \(t\).
+    \newline
+
+    Для этого необходимо знать явный вид апостериорных вероятностей \(w(\lambda_i|t_1,t_2,\dots,t_m,t)=P(\lambda(t)=\lambda_i|t_1,t_2,\dots,t_m,t)=w(\lambda_i|t)\)
+    \newline
+
+    Вывод о том, какое состояние процесса \(\lambda(t)\) имеет место в момент времени \(t\), выносится по критерию максимума апостериорной вероятности:
+    \[w(\lambda_i|t)\geq w(\lambda_j|t), j\ne i,\quad i,j=\overline{1,n} \Rightarrow \hat{\lambda}(t)=\lambda_i\]
+\end{frame}
+
+\begin{frame}{Введение}
+    Задачи, которые необходимо сделать для достижения поставленной цели:
+    \begin{enumerate}
+        \item Вывести инфинитезимальные характеристики потока.
+        \item Вывести рекуррентное соотношение для апостериорных вероятностей для дважды стохастических потоков событий с произвольным числом состояний.
+        \item Преобразовать эти рекуррентные соотношения, рассмотрев два случая.
+        \item Вывести формулы для априорных финальных вероятностей состояний процесса \(\lambda(t)\).
+    \end{enumerate}
 \end{frame}
 
 \end{document}
