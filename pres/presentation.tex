@@ -5,6 +5,8 @@
 \usepackage[T2A]{fontenc}
 \usepackage[english,russian]{babel}
 
+\newtheorem{rlemma}{Лемма}
+
 % Дата
 % \usepackage{datetime} % Для работы с \newdate
 
@@ -75,15 +77,38 @@
         0 & 0 & \dots & -(\lambda_n+\alpha_n)
     \end{bmatrix}
     \]
-    \[D_1=
+    {\color{black}
+\small
+\setlength{\arraycolsep}{2pt}
+\[D_1=
     \begin{bmatrix}
-        \lambda_1P_1^{(1)}(\lambda_1|\lambda_1)+\alpha_1P_1^{(2)}(\lambda_1|\lambda_1) & \lambda_1P_1^{(1)}(\lambda_2|\lambda_1)+\alpha_1P_1^{(2)}(\lambda_2|\lambda_1) & \dots & \lambda_1P_1^{(1)}(\lambda_n|\lambda_1)+\alpha_1P_1^{(2)}(\lambda_n|\lambda_1) \\
-        \lambda_2P_1^{(1)}(\lambda_1|\lambda_2)+\alpha_2P_1^{(2)}(\lambda_1|\lambda_2) & \lambda_2P_1^{(1)}(\lambda_2|\lambda_2)+\alpha_2P_1^{(2)}(\lambda_2|\lambda_2) & \dots & \lambda_2P_1^{(1)}(\lambda_n|\lambda_2)+\alpha_2P_1^{(2)}(\lambda_n|\lambda_2) \\
-        \lambda_nP_1^{(1)}(\lambda_1|\lambda_n)+\alpha_nP_1^{(2)}(\lambda_1|\lambda_n) & \lambda_nP_1^{(1)}(\lambda_2|\lambda_n)+\alpha_nP_1^{(2)}(\lambda_2|\lambda_n) & \dots & \lambda_nP_1^{(1)}(\lambda_n|\lambda_n)+\alpha_nP_1^{(2)}(\lambda_n|\lambda_n)
-    \end{bmatrix} 
-    \]
+        \lambda_1P_1^{(1)}(\lambda_1|\lambda_1)+\alpha_1P_1^{(2)}(\lambda_1|\lambda_1) & \dots & \lambda_1P_1^{(1)}(\lambda_n|\lambda_1)+\alpha_1P_1^{(2)}(\lambda_n|\lambda_1) \\
+        \lambda_2P_1^{(1)}(\lambda_1|\lambda_2)+\alpha_2P_1^{(2)}(\lambda_1|\lambda_2) & \dots & \lambda_2P_1^{(1)}(\lambda_n|\lambda_2)+\alpha_2P_1^{(2)}(\lambda_n|\lambda_2) \\
+        \dots & \dots &  \dots \\
+        \lambda_nP_1^{(1)}(\lambda_1|\lambda_n)+\alpha_nP_1^{(2)}(\lambda_1|\lambda_n) & \dots & \lambda_nP_1^{(1)}(\lambda_n|\lambda_n)+\alpha_nP_1^{(2)}(\lambda_n|\lambda_n)
+    \end{bmatrix}
+\]
+}
 \end{frame}
 
+\begin{frame}{Математическая модель}
+    Пусть наблюдение за потоком начинается в момент времени \(t=0\); время \(t\) меняется дискретно с шагом \(\Delta t:t^{(l)}=l\Delta t, l=0,1,\dots \). Введем двумерный случайный процесс \((\lambda^{(l)},r_l)\), где \(\lambda^{(l)}=\lambda(l\Delta t)\) -- значение процесса в момент времени \(t^{(l)}=l\Delta t \quad (\lambda^{(l)}=\lambda_i, i=\overline{1,n})\);\(\quad r_l=r_l(\Delta t)=r(l\Delta t) - r((l-1)\Delta t)\) -- число событий потока, наступивших на интервале времени \(((l-1)\Delta t,l\Delta t)\) длительности \(\Delta t\). 
+    \newline
 
+    \(r_0\) можно положить равным нулю, так как на интервале \((-\Delta t,0)\) наблюдение за потоком не производится.
+\end{frame}
+
+\begin{frame}
+    \begin{rlemma}[1]
+        Для обобщенного синхронного потока событий второго порядка с произвольным числом состояний случайный процесс \((\lambda^{(k)},r_k)\) является марковским
+    \end{rlemma}
+\end{frame}
+
+\begin{frame}{Математическая модель}
+    Для реализации алгоритма оптимального оценивания состояния процесса \(\lambda(t)\) по наблюдениям за потоком событий требуется найти апостериорную вероятность \(w(\lambda_i|\boldsymbol{r}_m)\) того, что в момент времени \(m\Delta t\) процесс \(\lambda(t)\) находится в состоянии \(\lambda_i\), т.е. \(\lambda(m\Delta t)=\lambda_i, i=\overline{1,n}\). Здесь \(w(\lambda_i|\boldsymbol{r}_m)=1-\sum_{j=1}^{n}w(\lambda_i|\boldsymbol{r}_m),i\ne j\). 
+    \newline
+
+    Обозначим \(p(\lambda^{(l)},r_l|\lambda^{(l-1)},r_{l-1})\) -- вероятность перехода процесса \((\lambda^{(l)},r_l)\) за один шаг \(\Delta t\) из \((\lambda^{(l-1)},r_{l-1})\) в состояние \((\lambda^{(l)},r_l)\); \(w(\boldsymbol{\lambda}^{(m)}|\boldsymbol{r}_m)\) -- совместная вероятность значений дискретных случайных величин \(\boldsymbol{\Lambda}^{(m)},\boldsymbol{R}^{(m)}\). Здесь \(\boldsymbol{\Lambda}^{(m)}=(\Lambda^{(0)},\dots,\Lambda^{(m)})\) -- вектор случайных величин, \(\boldsymbol{\lambda}^{(m)}=(\lambda^{(0)},\dots,\lambda^{(m)})\) -- вектор значений случайных величин \(\boldsymbol{\Lambda}^{(m)}\); \(\boldsymbol{R}^{(m)}=(R^{(0)},\dots,R^{(m)})\) -- вектор случайных величин,\(\boldsymbol{r}_m=(r_0,\dots,r_m)\) -- вектор значений случайной величины \(\boldsymbol{R}^{(m)}\). 
+\end{frame}
 
 \end{document}
