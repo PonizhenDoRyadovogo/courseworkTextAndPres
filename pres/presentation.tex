@@ -4,8 +4,13 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T2A]{fontenc}
 \usepackage[english,russian]{babel}
+\usepackage{amsmath}
 
 \newtheorem{rlemma}{Лемма}
+\newtheorem{rtheo}{Теорема}
+\newtheorem{consequence}{Следствие теоремы}
+\newtheorem{statement}{Утверждение}
+\newtheorem{remark}{Замечание}
 
 % Дата
 % \usepackage{datetime} % Для работы с \newdate
@@ -98,7 +103,7 @@
     \(r_0\) можно положить равным нулю, так как на интервале \((-\Delta t,0)\) наблюдение за потоком не производится.
 \end{frame}
 
-\begin{frame}
+\begin{frame}{Лемма о марковости процесса}
     \begin{rlemma}[1]
         Для обобщенного синхронного потока событий второго порядка с произвольным числом состояний случайный процесс \((\lambda^{(k)},r_k)\) является марковским
     \end{rlemma}
@@ -109,6 +114,81 @@
     \newline
 
     Обозначим \(p(\lambda^{(l)},r_l|\lambda^{(l-1)},r_{l-1})\) -- вероятность перехода процесса \((\lambda^{(l)},r_l)\) за один шаг \(\Delta t\) из \((\lambda^{(l-1)},r_{l-1})\) в состояние \((\lambda^{(l)},r_l)\); \(w(\boldsymbol{\lambda}^{(m)}|\boldsymbol{r}_m)\) -- совместная вероятность значений дискретных случайных величин \(\boldsymbol{\Lambda}^{(m)},\boldsymbol{R}^{(m)}\). Здесь \(\boldsymbol{\Lambda}^{(m)}=(\Lambda^{(0)},\dots,\Lambda^{(m)})\) -- вектор случайных величин, \(\boldsymbol{\lambda}^{(m)}=(\lambda^{(0)},\dots,\lambda^{(m)})\) -- вектор значений случайных величин \(\boldsymbol{\Lambda}^{(m)}\); \(\boldsymbol{R}^{(m)}=(R^{(0)},\dots,R^{(m)})\) -- вектор случайных величин,\(\boldsymbol{r}_m=(r_0,\dots,r_m)\) -- вектор значений случайной величины \(\boldsymbol{R}^{(m)}\). 
+\end{frame}
+
+\begin{frame}{Теорема 1}
+    Обозначим \(w(\boldsymbol{\lambda^{(m)}|\boldsymbol{r}_m})\) -- условная вероятность значений \(\boldsymbol{\lambda}^{(m)}\) при условии, что наблюдалась реализация \(\boldsymbol{r}_m\); \(w(\lambda^{(m)}|\boldsymbol{r}_m)\) -- условная вероятность значения \(\lambda^{(m)}\) при условии, что наблюдалась реализация \(\boldsymbol{r}_m\).
+
+    \begin{rtheo}[1]
+    Для дважды стохастических потоков событий второго порядка с произвольным числом состояний справедливо рекуррентное соотношение для апостериорных вероятностей:
+    \begin{equation}
+        \scriptstyle w(\lambda^{(m)}|\boldsymbol{r}_{m+1})=\frac{\sum\limits_{\lambda^{(m)}=\lambda_1}^{\lambda_n}w(\lambda^{(m)}|\boldsymbol{r}_m)p(\lambda^{(m+1)},r_{m+1}|\lambda^{(m)},r_m)}{\sum\limits_{\lambda^{(m)}=\lambda_1}^{\lambda_n}\sum\limits_{\lambda^{(m+1)}=\lambda_1}^{\lambda_n}w(\lambda^{(m)}|\boldsymbol{r}_m)p(\lambda^{(m+1)},r_{m+1}|\lambda^{(m)},r_m)}
+    \end{equation}
+    \end{rtheo}
+\end{frame}
+
+\begin{frame}{Следствие теоремы 1}
+    \begin{consequence}[1]
+В связи с тем, что \(p(\lambda^{(m+1)},r_{m+1}|\lambda^{(m)},r_m)=p(\lambda^{(m+1)}|\lambda^{(m)},r_m)p(r_{m+1}|\lambda^{(m)},r_m,\lambda^{(m+1)})\), рекуррентное соотношение (1) принимает вид:
+\begin{equation}
+    \scriptstyle w(\lambda^{(m)}|\boldsymbol{r_{m+1}})=\frac{\sum\limits_{\lambda^{(m)}=\lambda_1}^{\lambda_n}w(\lambda^{(m)}|\boldsymbol{r}_m)p(\lambda^{(m+1)}|\lambda^{(m)},r_m)p(r_{m+1}|\lambda^{(m)},r_m,\lambda^{(m+1)})}{\sum\limits_{\lambda^{(m)}=\lambda_1}^{\lambda_n}\sum\limits_{\lambda^{(m+1)}=\lambda_1}^{\lambda_n}w(\lambda^{(m)}|\boldsymbol{r_m})p(\lambda^{(m+1)}|\lambda^{(m)},r_m)p(r_{m+1}|\lambda^{(m)},r_m,\lambda^{(m+1)})}
+\end{equation}
+\end{consequence}
+\end{frame}
+
+\begin{frame}
+    \begin{statement}
+    Для обобщенного синхронного потока событий второго порядка с \(n\) состояниями переходная вероятность \(\scriptstyle p(\lambda^{(m+1)}|\lambda^{(m)},r_m)p(r_{m+1}|\lambda^{(m)},r_m,\lambda^{(m+1)})=p(\lambda^{(m+1)}|\lambda^{(m)})p(r_{m+1}|\lambda^{(m)},\lambda^{m+1})\)
+    \end{statement}
+
+    Учитывая также то, что вектор наблюдений \(\boldsymbol{r_{m}}\) является функцией времени, соотношение (2) можно записать в виде:
+    \begin{equation}
+        \scriptstyle w(\lambda^{(m)}|t+\Delta t)=\frac{\sum\limits_{\lambda^{(m)}=\lambda_1}^{\lambda_n}w(\lambda^{(m)}|t)p(\lambda^{(m+1)}|\lambda^{(m)},r_m)p(r_{m+1}|\lambda^{(m)},r_m,\lambda^{(m+1)})}{\sum\limits_{\lambda^{(m)}=\lambda_1}^{\lambda_n}\sum\limits_{\lambda^{(m+1)}=\lambda_1}^{\lambda_n}w(\lambda^{(m)}|t)p(\lambda^{(m+1)}|\lambda^{(m)},r_m)p(r_{m+1}|\lambda^{(m)},r_m,\lambda^{(m+1)})}
+    \end{equation}
+    \begin{remark}
+        Компонента \(r_l\) случайного вектора \((\lambda^{(l)},r_l)\) может принимать значения \(r_l=0\) или \(r_l=1\). Случаи \(r_l=2,3,\dots\), в силу определения различных типов дважды стохастических потоков имеют вероятность \(o(\Delta t)\)
+    \end{remark}
+\end{frame}
+
+\begin{frame}
+    Рассматривая два случая: когда \(r_{m+1}=0\) в (3), и когда \(r_{m+1}=1\) в (3). А также выполняя математические преобразования.\\
+    
+    При \(r_{m+1}=0\) получаем следующую формулу для апостериорных вероятностей:
+    \begin{equation}
+        \begin{aligned}
+        w(\lambda_i\mid t)&=\frac{w(\lambda_i|t_k)e^{-(\lambda_i+\alpha_i)(t-t_k)}}{\sum\limits_{s=1}^{n}w(\lambda_s|t_k)e^{-(\lambda_s+\alpha_s)(t-t_k)}}, \quad i=\overline{1,n} \\
+        w&=1-\sum_{j=1}^nw(\lambda_j\mid t), \quad j\ne i
+        \end{aligned}
+    \end{equation}
+\end{frame}
+
+\begin{frame}
+    При \(r_{m+1}=1\) получаем следующую формулу для пересчета апостериорной вероятности:
+    \begin{equation}
+        \begin{aligned}
+            w(\lambda_i\mid t_k+0)&=\frac{\sum\limits_{j=1}^{n}(\lambda_jP_1^{(1)}(\lambda_i\mid\lambda_j)+\alpha_jP_1^{(2)}(\lambda_i\mid\lambda_j))w(\lambda_j\mid t_k-0)}{\sum\limits_{j=1}^n\sum\limits_{s=1}^{n}(\lambda_jP_1^{(1)}(\lambda_s\mid\lambda_j)+\alpha_jP_1^{(2)}(\lambda_s\mid\lambda_j))w(\lambda_j\mid t_k-0)},\quad i=\overline{1,n} \\
+            w(\lambda_i\mid t_k+0)&=1-\sum_{j=1,j\ne i}^{n}w(\lambda_j\mid t_k+0), \quad k=1,2,\dots 
+        \end{aligned}
+    \end{equation}
+\end{frame}
+
+\begin{frame}
+    \begin{rlemma}[2]
+        Для обобщенного синхронного потока событий второго порядка с \(n\) состояниями априорные финальные вероятности состояний процесса \(\lambda(t)\) имеют вид:
+        \begin{equation}
+            \begin{aligned}
+            \pi_j&=\frac{P_{nj}}{detP}, \quad j=\overline{1,n}
+            \end{aligned}
+        \end{equation}
+        Где \(P_{nj}\) -- алгебраическое дополнение элемента \(p_{nj}\) матрицы:
+        \begin{equation*}
+            \scriptstyle P=||p_{ij}||, \quad p_{ij}=\begin{cases}
+                \scriptstyle \lambda_i(P_1^{(1)}(\lambda_i\mid\lambda_i)-1)+\alpha_i(P_1^{(2)}(\lambda_i\mid\lambda_i)-1),\quad i=j,i=\overline{1,n-1}\\
+                \scriptstyle \lambda_jP_1^{(1)}(\lambda_i\mid\lambda_j)+\alpha_jP_1^{(2)}(\lambda_i\mid\lambda_j),\quad i\ne j,i=\overline{1,n-1},j=\overline{1,n}\\
+                \scriptstyle 1, \quad i=n, j=\overline{1,n}
+            \end{cases}
+        \end{equation*}
+    \end{rlemma}
 \end{frame}
 
 \end{document}
